@@ -1,14 +1,15 @@
 import Layout from '../../components/layout';
 import { getAllPostsIds, getPostData } from '../../lib/posts';
+import styles from './post.module.css'
 
-export default function Post({id, title, date}) {
+export default function Post({id, title, date, contentHtml}) {
   return (
     <Layout>
-      {id}
-      <br/>
+      <p className={styles.title}>
       {title}
-      <br/>
+      </p>
       {date}
+      <div dangerouslySetInnerHTML={{__html: contentHtml}}></div>
     </Layout>
   );
 }
@@ -20,9 +21,9 @@ export function getStaticPaths() {
   }
 }
 
-export function getStaticProps({params}) {
+export async function getStaticProps({params}) {
   const id = params.id
   return {
-    props: getPostData(id)
+    props: await getPostData(id)
   }
 }

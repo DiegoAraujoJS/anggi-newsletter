@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
 import utilStyles from '../styles/utils.module.css';
@@ -10,11 +11,9 @@ export default function Home({allPostsData}) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
+        <p>Soy maquilladora profesional e hize este blog para compartir mi pasión con el mundo.</p>
+        <p>Sígueme para que me conozcas un poco más.</p>
+        <Link href={"/subscribe"}>¡Suscríbete al Newsletter!</Link>
       </section>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -23,9 +22,7 @@ export default function Home({allPostsData}) {
           {allPostsData.map(post => {
             return (
               <li className={utilStyles.listItem} key={post.id}>
-                {post.title}
-                <br/>
-                {post.id}
+                <Link href={`/posts/${post.id}`}> {post.title} </Link>
                 <br/>
                 {post.date}
               </li>

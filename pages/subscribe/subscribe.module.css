@@ -1,0 +1,19 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-right: 2em;
+}
+
+.form-label {
+  margin-right: 1em;
+}
+
+.form-input {
+  /* Your input styling here */
+  border-radius: 10px;
+}
