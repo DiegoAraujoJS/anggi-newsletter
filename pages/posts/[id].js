@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Layout from '../../components/layout';
 import { getAllPostsIds, getPostData } from '../../lib/posts';
 import styles from './post.module.css'
