@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Layout from '../../components/layout';
 import { getAllPostsIds, getPostData } from '../../lib/posts';
 import styles from './post.module.css'
@@ -8,7 +9,7 @@ export default function Post({id, title, date, contentHtml}) {
       <p className={styles.title}>
       {title}
       </p>
-      {date}
+      {new Date(date).toLocaleDateString()}
       <div dangerouslySetInnerHTML={{__html: contentHtml}}></div>
     </Layout>
   );

@@ -24,7 +24,7 @@ export default function Home({allPostsData}) {
               <li className={utilStyles.listItem} key={post.id}>
                 <Link href={`/posts/${post.id}`}> {post.title} </Link>
                 <br/>
-                {post.date}
+                {new Date(post.date).toLocaleDateString()}
               </li>
             )
           })}
@@ -34,7 +34,7 @@ export default function Home({allPostsData}) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const allPostsData = getSortedPostsData();
   return {
     props: {
