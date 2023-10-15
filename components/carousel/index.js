@@ -14,6 +14,9 @@ export default function Component() {
         <Carousel.Item className={styles['carousel-item']}>
           <img src="/images/anggi3.jpeg" alt="Image 3"/>
         </Carousel.Item>
+        <Carousel.Item className={styles['carousel-item']}>
+          <img src="/images/anggi3.jpeg" alt="Image 3"/>
+        </Carousel.Item>
       </Carousel>
     </>
   )
