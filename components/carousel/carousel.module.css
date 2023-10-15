@@ -1,8 +1,11 @@
 .carousel img {
-  height: 400px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
 }
 
 .carousel-item {
-  display: flex;
-  justify-content: center;
 }
