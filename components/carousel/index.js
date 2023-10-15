@@ -15,7 +15,7 @@ export default function Component() {
           <img src="/images/anggi3.jpeg" alt="Image 3"/>
         </Carousel.Item>
         <Carousel.Item className={styles['carousel-item']}>
-          <img src="/images/anggi3.jpeg" alt="Image 3"/>
+          <img src="/images/anggi4.jpeg" alt="Image 3"/>
         </Carousel.Item>
       </Carousel>
     </>

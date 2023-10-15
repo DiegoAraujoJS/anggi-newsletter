@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Script from 'next/script';
 import Carousel from '../components/carousel';
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';

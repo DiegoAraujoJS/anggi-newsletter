@@ -1,3 +1,7 @@
+.carousel {
+  padding-bottom: 25px;
+}
+
 .carousel img {
   height: 300px;
   margin-left: auto;
