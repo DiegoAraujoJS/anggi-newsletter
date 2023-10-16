@@ -25,6 +25,16 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+
+      <div className='flex justify-end'>
+        <label className="label cursor-pointer w-1/4">
+          <span className="label-text">Dark mode</span> 
+          <input type="checkbox" className="toggle" onChange={(e) => {
+            document.querySelector('html')?.setAttribute('data-theme', e.target.checked ? "dark" : "anggi")
+            console.log(e.target.checked)
+          }} />
+        </label>
+      </div>
       <header className={styles.header}>
         {home ? (
           <>

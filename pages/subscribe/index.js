@@ -26,17 +26,17 @@ export default function Page() {
         <div className="sm:col-span-4">
           <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
           <div className="mt-2">
-            <input type="text" id="name" name="name" className="input input-bordered input-primary w-full" />
+            <input type="text" id="name" name="name" className="input input-bordered input-primary w-full" required />
           </div>
         </div>
         <div className="sm:col-span-4">
           <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email</label>
           <div className="mt-2">
-            <input type="email" id="email" name="email" autoComplete="email" className="input input-bordered input-primary w-full" />
+            <input type="email" id="email" name="email" autoComplete="email" className="input input-bordered input-primary w-full" required />
           </div>
         </div>
         <br/>
-        <button type="submit" className="rounded-md bg-palette-1 px-3 py-2 text-sm text-palette-4 shadow-sm ">Suscribirme</button>
+        <button type="submit" className="btn btn-primary">Suscribirme</button>
       </form>
     </Layout>
   )

@@ -19,7 +19,7 @@ export default function Page() {
           </div>
         </div>
         <br/>
-        <button type="submit" className="rounded-md bg-palette-1 px-3 py-2 text-sm text-palette-4 shadow-sm block">Ingresar</button>
+        <button type="submit" className="btn btn-primary">Ingresar</button>
       </form>
     </div>
   )
