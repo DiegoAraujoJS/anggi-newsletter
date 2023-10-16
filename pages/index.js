@@ -2,9 +2,14 @@ import Head from 'next/head';
 import Link from "next/link";
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
+import useStore from '../store/store';
 import utilStyles from '../styles/utils.module.css';
 
 export default function Home({allPostsData}) {
+  const {isAdmin} = useStore()
+
+  console.log(isAdmin)
+
   return (
     <Layout home>
       <Head>
@@ -19,6 +24,7 @@ export default function Home({allPostsData}) {
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
+        {isAdmin ? <div>Crear Post</div> : null}
         <ul className={utilStyles.list}>
           {allPostsData.map(post => {
             return (
