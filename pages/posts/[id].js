@@ -1,11 +1,10 @@
 import Layout from '../../components/layout';
 import { getAllPostsIds, getPostData } from '../../lib/posts';
-import styles from './post.module.css'
 
 export default function Post({id, title, date, contentHtml}) {
   return (
     <Layout>
-      <p className={styles.title}>
+      <p className={`bg-primary text-3xl rounded-lg p-2 mb-4`}>
       {title}
       </p>
       {new Date(date).toLocaleDateString()}
