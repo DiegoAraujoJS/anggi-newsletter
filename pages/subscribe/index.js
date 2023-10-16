@@ -9,21 +9,35 @@ export default function Page() {
       <Head>
         <title>Newsletter</title>
       </Head>
-
+      <form onSubmit={(e) => {
+        e.preventDefault()
+        return fetch(`/api/subscribe`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({name: e.target.name.value, email: e.target.email.value})
+        })
+          .then(res => {
+            if (res.status == 200) {
+              return toast.success('Se guardó la subscripción 🤗')
+            }
+            return res.text().then(toast.error)
+          })
+      }}>
         <div className="sm:col-span-4">
           <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
           <div className="mt-2">
-            <input id="name" name="name" type="text" className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2"/>
+            <input type="text" id="name" name="name" className="input input-bordered input-primary w-full" />
           </div>
         </div>
         <div className="sm:col-span-4">
           <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email</label>
           <div className="mt-2">
-            <input id="email" name="email" type="email" autoComplete="email" className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2"/>
+            <input type="email" id="email" name="email" autoComplete="email" className="input input-bordered input-primary w-full" />
           </div>
         </div>
         <br/>
         <button type="submit" className="rounded-md bg-palette-1 px-3 py-2 text-sm text-palette-4 shadow-sm ">Suscribirme</button>
+      </form>
     </Layout>
   )
 }
