@@ -4,17 +4,23 @@ const {nextui} = require("@nextui-org/react");
 module.exports = {
   content: [
     "./src/**/*.{html,js}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    colors: {
+      red: "#9A4444"
+    }
   },
   darkMode: "class",
   plugins: [nextui({
     themes: {
       light: {
         colors: {
-          background: "#F4DFB6"
+          background: "#F4DFB6",
+          secondary: "#D6D46D",
         }
       }
     }

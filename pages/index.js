@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import {Link} from "@nextui-org/react";
 import Carousel from '../components/carousel';
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
@@ -19,7 +19,7 @@ export default function Home({allPostsData}) {
       <section className={utilStyles.headingMd}>
         <p>Soy maquilladora profesional e hize este blog para compartir mi pasión con el mundo.</p>
         <p>Sígueme para que me conozcas un poco más.</p>
-        <Link href={"/subscribe"}>¡Suscríbete al Newsletter!</Link>
+        <Link href={"/subscribe"} className="text-red">¡Suscríbete al Newsletter!</Link>
       </section>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -28,7 +28,7 @@ export default function Home({allPostsData}) {
           {allPostsData.map(post => {
             return (
               <li className={utilStyles.listItem} key={post.id}>
-                <Link href={`/posts/${post.id}`}> {post.title} </Link>
+                <Link href={`/posts/${post.id}`} className="text-red"> {post.title} </Link>
                 <br/>
                 {new Date(post.date).toLocaleDateString()}
               </li>

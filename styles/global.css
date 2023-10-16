@@ -2,47 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-
-
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family:
-    'Playfair Display',
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    Fira Sans,
-    Droid Sans,
-    Helvetica Neue,
-    sans-serif;
-  background: #F4DFB6;
 }
 
-a {
+.link {
   color: #9A4444;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-button {
-  border-radius: 10px;
-  padding: 3px;
 }
 
 .top-25 {
