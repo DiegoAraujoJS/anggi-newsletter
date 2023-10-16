@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
 import useStore from '../store/store';
@@ -9,6 +10,7 @@ export default function Home({allPostsData}) {
   const {isAdmin} = useStore()
 
   console.log(isAdmin)
+  const router = useRouter()
 
   return (
     <Layout home>
@@ -23,8 +25,11 @@ export default function Home({allPostsData}) {
       </section>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        {isAdmin ? <div>Crear Post</div> : null}
+        <div className='flex items-center text-2xl w-1/5 justify-between'>
+          <h2 className={utilStyles.headingLg}>Blog</h2>
+          {isAdmin ? <button className="btn btn-circle btn-primary" onClick={() => router.push("/posts/create")}>+</button>
+            : null}
+        </div>
         <ul className={utilStyles.list}>
           {allPostsData.map(post => {
             return (
