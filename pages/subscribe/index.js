@@ -32,7 +32,6 @@ export default function Page() {
           <label className={styles['form-label']} htmlFor="email">Email:</label>
           <input className={styles['form-input']} type="email" id="email" name="email" required/>
         </div>
-        <button type="submit">Suscribirme</button>
       </form>
 
     </Layout>

@@ -1,6 +1,7 @@
 .form-container {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 .form-group {
