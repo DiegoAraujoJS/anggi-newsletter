@@ -16,7 +16,18 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ['light', 'dark']
+    themes: [
+      {
+        anggi: {
+          "primary": "#D6D46D",
+          "secondary": "#9A4444",
+          "accent": "#DE8F5F",
+          "base-100": "#F4DFB6"
+        }
+      },
+      'light',
+      'dark',
+    ]
   }
 }
 

@@ -7,11 +7,10 @@ const playfairDisplay = Playfair_Display({subsets: ['latin']})
 export default function App ({Component, pageProps}) {
   return (
     <>
-      <div data-theme="dark" className={`h-screen ${playfairDisplay.className}`}>
+      <div className={`${playfairDisplay.className}`}>
         <Component {...pageProps}/>
         <Toaster/>
       </div>
-      
     </>
   )
 }

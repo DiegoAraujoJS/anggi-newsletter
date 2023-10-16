@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    @apply bg-palette-2
-  }
-}
-
 html,
 body {
   padding: 0;
