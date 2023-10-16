@@ -24,13 +24,13 @@ export default function Page() {
           })
       }}>
         <div className="sm:col-span-4">
-          <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
+          <label htmlFor="name" className="block text-sm font-medium leading-6">Nombre</label>
           <div className="mt-2">
             <input type="text" id="name" name="name" className="input input-bordered input-primary w-full" required />
           </div>
         </div>
         <div className="sm:col-span-4">
-          <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email</label>
+          <label htmlFor="email" className="block text-sm font-medium leading-6">Email</label>
           <div className="mt-2">
             <input type="email" id="email" name="email" autoComplete="email" className="input input-bordered input-primary w-full" required />
           </div>

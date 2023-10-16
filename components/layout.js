@@ -3,11 +3,13 @@ import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
+import useStore from '../store/store';
 
 const name = 'Anggi Bustamante';
 export const siteTitle = 'Anggi Bustamante';
 
 export default function Layout({ children, home }) {
+  const {theme, setTheme} = useStore()
   return (
     <div className={styles.container}>
       <Head>
@@ -29,9 +31,8 @@ export default function Layout({ children, home }) {
       <div className='flex justify-end'>
         <label className="label cursor-pointer w-1/4">
           <span className="label-text">Dark mode</span> 
-          <input type="checkbox" className="toggle" onChange={(e) => {
-            document.querySelector('html')?.setAttribute('data-theme', e.target.checked ? "dark" : "anggi")
-            console.log(e.target.checked)
+          <input type="checkbox" className="toggle" checked={theme === "dark"} onChange={(e) => {
+            setTheme(e.target.checked ? "dark" : "anggi")
           }} />
         </label>
       </div>

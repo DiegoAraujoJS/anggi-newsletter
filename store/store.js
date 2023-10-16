@@ -6,6 +6,11 @@ const useStore = create((set) => ({
     body: password,
   })
     .then(res => res.json())
-    .then((res) => set(() => ({isAdmin: res})))
+    .then((res) => set(() => ({isAdmin: res}))),
+  theme: "anggi",
+  setTheme: (theme) => {
+    document.querySelector('html')?.setAttribute('data-theme', theme)
+    return set((state) => ({theme: theme}))
+  }
 }));
 export default useStore;

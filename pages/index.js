@@ -8,10 +8,7 @@ import utilStyles from '../styles/utils.module.css';
 
 export default function Home({allPostsData}) {
   const {isAdmin} = useStore()
-
-  console.log(isAdmin)
   const router = useRouter()
-
   return (
     <Layout home>
       <Head>

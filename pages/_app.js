@@ -10,7 +10,6 @@ export default function App ({Component, pageProps}) {
   const {authenticate} = useStore()
   useEffect(() => {
     authenticate(localStorage.getItem('adminPassword'))
-    console.log("inside _app")
   }, [])
   return (
     <>
