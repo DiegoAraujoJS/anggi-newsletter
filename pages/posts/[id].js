@@ -2,12 +2,19 @@ import Layout from '../../components/layout';
 import { getAllPostsIds, getPostData } from '../../lib/posts';
 
 export default function Post({id, title, date, contentHtml}) {
+
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
     <Layout>
       <p className={`bg-primary text-3xl rounded-lg p-2 mb-4`}>
       {title}
       </p>
-      {new Date(date).toLocaleDateString()}
+      {isClient ? new Date(date).toLocaleDateString() : null}
       <div dangerouslySetInnerHTML={{__html: contentHtml}}></div>
     </Layout>
   );

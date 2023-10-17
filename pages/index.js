@@ -9,6 +9,13 @@ import utilStyles from '../styles/utils.module.css';
 export default function Home({allPostsData}) {
   const {isAdmin} = useStore()
   const router = useRouter()
+
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
     <Layout home>
       <Head>
@@ -33,7 +40,7 @@ export default function Home({allPostsData}) {
               <li className={utilStyles.listItem} key={post.id}>
                 <Link href={`/posts/${post.id}`} className="text-red-800"> {post.title} </Link>
                 <br/>
-                {new Date(post.date).toLocaleDateString()}
+                {isClient ? new Date(post.date).toLocaleDateString() : null}
               </li>
             )
           })}
