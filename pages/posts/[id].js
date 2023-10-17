@@ -1,5 +1,6 @@
 import Layout from '../../components/layout';
 import { getAllPostsIds, getPostData } from '../../lib/posts';
+import { useEffect, useState } from 'react';
 
 export default function Post({id, title, date, contentHtml}) {
 

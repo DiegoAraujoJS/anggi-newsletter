@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/posts';
 import useStore from '../store/store';
