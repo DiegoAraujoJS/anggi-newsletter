@@ -39,8 +39,16 @@ export default function Home({allPostsData}) {
           {allPostsData.map(post => {
             return (
               <li className={utilStyles.listItem} key={post.id}>
-                <Link href={`/posts/${post.id}`} className="text-red-800"> {post.title} </Link>
-                <br/>
+                <div className='flex justify-between'>
+                  <Link href={`/posts/${post.id}`} className="text-red-800"> {post.title} </Link>
+                  {isAdmin ? <button className='btn btn-secondary min-h-0 h-full' onClick={() => fetch(`/api/posts/deletePost`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(post.id)
+                  })
+                    .then(() => location.reload())
+                  }>Eliminar</button> : null}
+                </div>
                 {isClient ? new Date(post.createdAt).toLocaleDateString() : null}
               </li>
             )

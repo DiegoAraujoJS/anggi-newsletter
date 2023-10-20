@@ -2,7 +2,7 @@ import Layout from '../../components/layout';
 import { useEffect, useState } from 'react';
 import { getPost } from '../../lib/database/queries/posts';
 
-export default function Post({id, title, date, contentHtml}) {
+export default function Post({id, title, date, body}) {
 
   const [isClient, setIsClient] = useState(false)
  
@@ -16,7 +16,7 @@ export default function Post({id, title, date, contentHtml}) {
       {title}
       </p>
       {isClient ? new Date(date).toLocaleDateString() : null}
-      <div dangerouslySetInnerHTML={{__html: contentHtml}}></div>
+      <div dangerouslySetInnerHTML={{__html: body}}></div>
     </Layout>
   );
 }
