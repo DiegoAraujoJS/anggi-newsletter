@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout, { siteTitle } from '../components/layout';
-import { getSortedPostsData } from '../lib/posts';
+import { getAllPostsTitles } from '../lib/database/queries/posts';
 import useStore from '../store/store';
 import utilStyles from '../styles/utils.module.css';
 
@@ -41,7 +41,7 @@ export default function Home({allPostsData}) {
               <li className={utilStyles.listItem} key={post.id}>
                 <Link href={`/posts/${post.id}`} className="text-red-800"> {post.title} </Link>
                 <br/>
-                {isClient ? new Date(post.date).toLocaleDateString() : null}
+                {isClient ? new Date(post.createdAt).toLocaleDateString() : null}
               </li>
             )
           })}
@@ -52,10 +52,10 @@ export default function Home({allPostsData}) {
 }
 
 export async function getServerSideProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getAllPostsTitles()
   return {
     props: {
-      allPostsData
+      allPostsData : allPostsData
     }
   }
 }

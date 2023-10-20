@@ -1,6 +1,6 @@
 import Layout from '../../components/layout';
-import { getAllPostsIds, getPostData } from '../../lib/posts';
 import { useEffect, useState } from 'react';
+import { getPost } from '../../lib/database/queries/posts';
 
 export default function Post({id, title, date, contentHtml}) {
 
@@ -21,16 +21,9 @@ export default function Post({id, title, date, contentHtml}) {
   );
 }
 
-export function getStaticPaths() {
-  return {
-    paths: getAllPostsIds(),
-    fallback: false
-  }
-}
-
-export async function getStaticProps({params}) {
+export async function getServerSideProps({params}) {
   const id = params.id
   return {
-    props: await getPostData(id)
+    props: await getPost(id)
   }
 }
