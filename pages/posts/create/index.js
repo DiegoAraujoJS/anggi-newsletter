@@ -3,6 +3,7 @@ import Layout from "../../../components/layout";
 import dynamic from 'next/dynamic'
 import { useState } from "react";
 import { useRouter } from "next/router";
+import PostBody from "../../../components/post";
 
 const RichTextEditor = dynamic(
   () => import( "../../../components/RichTextEditor"),
@@ -43,12 +44,7 @@ export default function Page() {
       <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_1').showModal()}>Postear</button>
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
-          <p className={`bg-primary text-3xl rounded-lg p-2 mb-4`}>
-            {title}
-          </p>
-          {new Date().toLocaleDateString()}
-          <div dangerouslySetInnerHTML={{__html: body}}>
-          </div>
+          <PostBody title={title} body={body} date={new Date().toLocaleDateString()}/>
           <div className="modal-action">
             <button className="btn btn-primary" onClick={() => fetch(`/api/posts/createPost`, {
               method: 'POST',

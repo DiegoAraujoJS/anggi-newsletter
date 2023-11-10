@@ -1,6 +1,7 @@
 import Layout from '../../components/layout';
 import { useEffect, useState } from 'react';
 import { getPost } from '../../lib/database/queries/posts';
+import PostBody from '../../components/post';
 
 export default function Post({id, title, date, body}) {
 
@@ -12,11 +13,7 @@ export default function Post({id, title, date, body}) {
 
   return (
     <Layout>
-      <p className={`bg-primary text-3xl rounded-lg p-2 mb-4`}>
-      {title}
-      </p>
-      {isClient ? new Date(date).toLocaleDateString() : null}
-      <div dangerouslySetInnerHTML={{__html: body}}></div>
+      <PostBody title={title} body={body} date={isClient ? new Date(date).toLocaleDateString() : null}/>
     </Layout>
   );
 }
