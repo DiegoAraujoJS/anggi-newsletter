@@ -40,12 +40,15 @@ export default function Home({allPostsData}) {
         <div className="modal-box">
           Seguro que querés eliminar "{postToDelete.title}"?
           <div className="modal-action">
-            <button className="btn btn-primary" onClick={() => fetch(`/api/posts/deletePost`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(postToDelete.id)
-                  })
-                    .then(() => location.reload())            
+              <button className="btn btn-primary" onClick={() => fetch(`/api/posts/deletePost`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  authorization: localStorage.getItem('adminPassword')
+                },
+                body: JSON.stringify(postToDelete.id)
+              })
+                .then(() => location.reload())            
               }>Postear</button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
