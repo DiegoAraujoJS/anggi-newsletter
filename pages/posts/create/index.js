@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Layout from "../../../components/layout";
 import dynamic from 'next/dynamic'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import PostBody from "../../../components/post";
 
@@ -15,6 +15,22 @@ export default function Page() {
   const [subTitle, setSubTitle] = useState('')
   const [body, setBody] = useState('')
 
+  useEffect(() => {
+    setTitle(localStorage.getItem('title') ?? '')
+    setSubTitle(localStorage.getItem('subTitle') ?? '')
+    setBody(localStorage.getItem('body') ?? '')
+  }, [])
+
+  /**
+   * @param {string} input
+   * @param {(s: string) => void} setState 
+   * @param {string} key
+   */
+  const setStateAndSaveToLocalStorage = (input, setState, key) => {
+    setState(input)
+    return new Promise(() => localStorage.setItem(key, input))
+  }
+
   const router = useRouter()
 
   return (
@@ -26,20 +42,20 @@ export default function Page() {
         <label className="label">
           <span className="label-text">Título</span>
         </label>
-        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" onChange={e => setTitle(e.target.value)}/>
+        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={title} onChange={e => setStateAndSaveToLocalStorage(e.target.value, setTitle, 'title')}/>
       </div>
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Subtítulo</span>
         </label>
-        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" onChange={e => setSubTitle(e.target.value)}/>
+        <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={subTitle} onChange={e => setStateAndSaveToLocalStorage(e.target.value, setSubTitle, 'subTitle')}/>
       </div>
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Cuerpo</span>
         </label>
       </div>
-      <RichTextEditor value={body} handleChange={(html) => setBody(html)}/>
+      <RichTextEditor value={body} handleChange={(html) => setStateAndSaveToLocalStorage(html, setBody, 'body')}/>
       <br/>
       <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_1').showModal()}>Postear</button>
       <dialog id="my_modal_1" className="modal">
@@ -54,6 +70,11 @@ export default function Page() {
               .then(response => response.json())
               .then(post => {
                 return router.push(`/posts/${post.id}`)
+              })
+              .then(() => {
+                localStorage.removeItem('title')
+                localStorage.removeItem('subTitle')
+                localStorage.removeItem('body')
               })
             }>Postear</button>
             <form method="dialog">
