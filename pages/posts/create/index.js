@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import PostBody from "../../../components/post";
+import { toast } from "react-hot-toast";
 
 const RichTextEditor = dynamic(
   () => import( "../../../components/RichTextEditor"),
@@ -64,14 +65,16 @@ export default function Page() {
           <div className="modal-action">
             <button className="btn btn-primary" onClick={() => fetch(`/api/posts/createPost`, {
               method: 'POST',
-              headers: {'Content-Type': 'application/json'},
+              headers: {
+                'Content-Type': 'application/json',
+                authorization: localStorage.getItem('adminPassword')
+              },
               body: JSON.stringify({title, subTitle, body, date: new Date().toISOString()})
             })
-              .then(response => response.json())
-              .then(post => {
-                return router.push(`/posts/${post.id}`)
-              })
-              .then(() => {
+              .then(async (response) => {
+                if (response.status !== 200) return response.text().then(toast.error)
+                const post = await response.json()
+                router.push(`/posts/${post.id}`)
                 localStorage.removeItem('title')
                 localStorage.removeItem('subTitle')
                 localStorage.removeItem('body')
