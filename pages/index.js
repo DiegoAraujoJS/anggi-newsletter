@@ -1,22 +1,34 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Link from "next/link";
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import Layout, { siteTitle } from '../components/layout';
 import { getAllPostsTitles } from '../lib/database/queries/posts';
+import { getPresentation } from '../lib/database/queries/presentation';
 import useStore from '../store/store';
 import utilStyles from '../styles/utils.module.css';
 
-export default function Home({allPostsData}) {
+const RichTextEditor = dynamic(
+  () => import("../components/RichTextEditor"),
+  {ssr: false}
+)
+
+export default function Home({allPostsData, presentation}) {
   const {isAdmin} = useStore()
   const router = useRouter()
   const [postToDelete, setPostToDelete] = useState({title: ""})
 
   const [isClient, setIsClient] = useState(false)
+
+  const [body, setBody] = useState(presentation)
  
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  console.log(body)
 
   return (
     <Layout home>
@@ -24,11 +36,26 @@ export default function Home({allPostsData}) {
         <title>{siteTitle}</title>
       </Head>
 
-      <section className={utilStyles.headingMd}>
-        <p>Soy maquilladora profesional e hize este blog para compartir mi pasión con el mundo.</p>
-        <p>Sígueme para que me conozcas un poco más.</p>
-        <Link href={"/subscribe"} className="text-red-800">¡Suscríbete al Newsletter!</Link>
-      </section>
+      {isAdmin ? <div>
+        <RichTextEditor value={body} handleChange={html => setBody(html)}/>
+        <button className='btn' onClick={() => {
+          fetch(`/api/presentation`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              authorization: localStorage.getItem('adminPassword')
+            },
+            body: JSON.stringify({body})
+          })
+          .then((res) => {
+              if (res.status === 200) {
+                return res.text().then(toast.success)
+              }
+            })
+        }}>Update</button>
+      </div> : <section className={utilStyles.headingMd}>
+          <div dangerouslySetInnerHTML={{__html: body}}></div>
+        </section>}
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <div className='flex items-center text-2xl w-1/5 justify-between'>
@@ -77,9 +104,11 @@ export default function Home({allPostsData}) {
 
 export async function getServerSideProps() {
   const allPostsData = await getAllPostsTitles()
+  const presentation = await getPresentation()
   return {
     props: {
-      allPostsData : allPostsData
+      allPostsData: allPostsData,
+      presentation: presentation['richText']
     }
   }
 }

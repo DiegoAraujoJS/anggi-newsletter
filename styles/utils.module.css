@@ -23,6 +23,10 @@
   line-height: 1.5;
 }
 
+.headingMd a {
+  color: #9A4444;
+}
+
 .borderCircle {
   border-radius: 9999px;
 }
