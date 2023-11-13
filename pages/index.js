@@ -54,7 +54,7 @@ export default function Home({allPostsData, presentation}) {
             })
         }}>Update</button>
       </div> : <section className={utilStyles.headingMd}>
-          <div dangerouslySetInnerHTML={{__html: body}}></div>
+          <div dangerouslySetInnerHTML={{__html: body.replace(`target="_blank"`, '')}}></div>
         </section>}
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
