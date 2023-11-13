@@ -102,13 +102,17 @@ export default function Home({allPostsData, presentation}) {
   );
 }
 
-export async function getServerSideProps() {
-  const allPostsData = await getAllPostsTitles()
-  const presentation = await getPresentation()
-  return {
-    props: {
-      allPostsData: allPostsData,
-      presentation: presentation['richText']
-    }
-  }
+export function getServerSideProps() {
+  return Promise.all([
+    getAllPostsTitles(),
+    getPresentation()
+  ])
+    .then(([allPostsData, presentation]) => {
+      return {
+        props: {
+          allPostsData: allPostsData,
+          presentation: presentation['richText']
+        }
+      }
+    })
 }
