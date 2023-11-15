@@ -76,7 +76,7 @@ export default function Home({allPostsData, presentation}) {
                 body: JSON.stringify(postToDelete.id)
               })
                 .then(() => location.reload())            
-              }>Postear</button>
+              }>Eliminar</button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Cerrar</button>
