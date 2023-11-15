@@ -86,7 +86,7 @@ siteTitle,
         )}
       </div>
       {home && (
-        <div className='text-sm absolute right-5'>
+        <div className='text-sm absolute right-5 bottom-2'>
           <span>
             Blog developed by:
           </span>
