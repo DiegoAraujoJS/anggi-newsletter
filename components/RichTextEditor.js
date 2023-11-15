@@ -10,7 +10,11 @@ const modules = {
 const RichTextEditor = ({handleChange, value}) => {
   return (
     <ReactQuill value={value} onChange={handleChange} modules={modules} formats={[
-      'link'
+      'link',
+      'bold',
+      'italic',
+      'underline',
+      'blockquote'
     ]}/>
   );
 };

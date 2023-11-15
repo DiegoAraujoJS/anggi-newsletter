@@ -111,7 +111,7 @@ export function getServerSideProps() {
       return {
         props: {
           allPostsData: allPostsData,
-          presentation: presentation['richText']
+          presentation: presentation?.richText || ""
         }
       }
     })
