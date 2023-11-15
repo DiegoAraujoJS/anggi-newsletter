@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 
 export default function Page() {
@@ -8,7 +9,7 @@ export default function Page() {
         e.preventDefault()
         // Save form value in localStorage as adminPassword.
         const value = e.target.password.value
-        localStorage.setItem('adminPassword', value)
+        Cookies.set('adminPassword', value)
         // Redirect to Home
         router.push("/")
       }}>

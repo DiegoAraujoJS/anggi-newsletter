@@ -7,7 +7,6 @@ import { toast } from 'react-hot-toast';
 import Layout, { siteTitle } from '../components/layout';
 import { getAllPostsTitles } from '../lib/database/queries/posts';
 import { getPresentation } from '../lib/database/queries/presentation';
-import useStore from '../store/store';
 import utilStyles from '../styles/utils.module.css';
 
 const RichTextEditor = dynamic(
@@ -15,8 +14,7 @@ const RichTextEditor = dynamic(
   {ssr: false}
 )
 
-export default function Home({allPostsData, presentation}) {
-  const {isAdmin} = useStore()
+export default function Home({allPostsData, presentation, isAdmin}) {
   const router = useRouter()
   const [postToDelete, setPostToDelete] = useState({title: ""})
 
@@ -43,12 +41,14 @@ export default function Home({allPostsData, presentation}) {
             <button className="btn btn-primary" onClick={() => fetch(`/api/posts/deletePost`, {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json',
-                authorization: localStorage.getItem('adminPassword')
+                'Content-Type': 'application/json'
               },
               body: JSON.stringify(postToDelete.id)
             })
-              .then(() => location.reload())            
+              .then((response) => {
+                if (response.status !== 200) return response.text().then(toast.error)
+                location.reload()
+              })            
             }>Eliminar</button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
@@ -67,16 +67,15 @@ export default function Home({allPostsData, presentation}) {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
-                  authorization: localStorage.getItem('adminPassword')
                 },
                 body: JSON.stringify({body})
               })
-                .then((res) => {
-                  if (res.status === 200) {
-                    return res.text().then(toast.success)
+                .then((response) => {
+                  if (response.status !== 200) return response.text().then(toast.error)
+                  if (response.status === 200) {
+                    return response.text().then(toast.success)
                   }
                 })
-                .then(() => setTimeout(() => location.reload(), 2000))
             }}>Update</button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
@@ -119,16 +118,18 @@ export default function Home({allPostsData, presentation}) {
   );
 }
 
-export function getServerSideProps() {
+export function getServerSideProps(context) {
   return Promise.all([
     getAllPostsTitles(),
-    getPresentation()
+    getPresentation(),
+    context.req.cookies.adminPassword === process.env.ADMIN_PASSWORD // boolean for "isAdmin"
   ])
-    .then(([allPostsData, presentation]) => {
+    .then(([allPostsData, presentation, isAdmin]) => {
       return {
         props: {
-          allPostsData: allPostsData,
-          presentation: presentation?.richText || ""
+          allPostsData,
+          presentation: presentation?.richText || "",
+          isAdmin
         }
       }
     })

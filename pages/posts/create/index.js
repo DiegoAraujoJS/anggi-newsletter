@@ -67,7 +67,6 @@ export default function Page() {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                authorization: localStorage.getItem('adminPassword')
               },
               body: JSON.stringify({title, subTitle, body, date: new Date().toISOString()})
             })
