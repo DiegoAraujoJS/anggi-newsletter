@@ -11,7 +11,6 @@ export const siteTitle = 'Anggi Bustamante';
 export default function Layout({ children, home }) {
   const {theme, setTheme} = useStore()
   return (
-    <div className='min-h-screen relative'>
       <div className={styles.container}>
         <Head>
           <link rel="icon" href="/favicon.ico" />
@@ -85,14 +84,5 @@ siteTitle,
           </div>
         )}
       </div>
-      {home && (
-        <div className='text-sm absolute right-5 bottom-2'>
-          <span>
-            Blog developed by:
-          </span>
-          <Link href="http://ec2-54-204-204-201.compute-1.amazonaws.com/portfolio/" target="_blank" className='text-palette-4'> Diego Araujo</Link>
-        </div>)
-      }
-    </div>
   );
 }
