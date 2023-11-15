@@ -90,7 +90,7 @@ siteTitle,
           <span>
             Blog developed by:
           </span>
-          <Link href="http://ec2-54-204-204-201.compute-1.amazonaws.com/portfolio/" target="_blank" className='text-secondary'> Diego Araujo</Link>
+          <Link href="http://ec2-54-204-204-201.compute-1.amazonaws.com/portfolio/" target="_blank" className='text-palette-4'> Diego Araujo</Link>
         </div>)
       }
     </div>
