@@ -26,8 +26,6 @@ export default function Home({allPostsData, presentation, isAdmin}) {
     setIsClient(true)
   }, [])
 
-  console.log(body)
-
   return (
     <Layout home>
       <Head>

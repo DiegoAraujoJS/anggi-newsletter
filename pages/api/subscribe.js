@@ -1,7 +1,6 @@
 import { insertSubscription } from "../../lib/database/queries/subscription"
 
 export default function handler (req, res) {
-  console.log(req.body)
   return insertSubscription(req.body)
     .then(res.send)
     .catch(err => {
