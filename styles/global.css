@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .presentation a {
+    @apply text-palette-4
+  }
+}
+
 html,
 body {
   padding: 0;

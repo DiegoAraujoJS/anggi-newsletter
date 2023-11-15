@@ -89,12 +89,12 @@ export default function Home({allPostsData, presentation}) {
       {isAdmin ? <div>
         <RichTextEditor value={body} handleChange={html => setBody(html)}/>
         <button className='btn' onClick={() => document.getElementById('my_modal_3').showModal()}>Update</button>
-      </div> : <section className={utilStyles.headingMd}>
+      </div> : <section className="text-lg presentation">
           <div dangerouslySetInnerHTML={{__html: body.replace(`target="_blank"`, '')}}></div>
         </section>}
 
 
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+      <section className={`${utilStyles.padding1px} text-lg`}>
         <div className='flex items-center text-2xl w-1/5 justify-between'>
           <h2 className={utilStyles.headingLg}>Blog</h2>
           {isAdmin ? <button className="btn btn-circle btn-primary" onClick={() => router.push("/posts/create")}>+</button>
@@ -106,7 +106,7 @@ export default function Home({allPostsData, presentation}) {
             return (
               <li className={utilStyles.listItem} key={post.id}>
                 <div className='flex justify-between'>
-                  <Link href={`/posts/${post.id}`} className="text-red-800"> {post.title} </Link>
+                  <Link href={`/posts/${post.id}`} className="text-palette-4"> {post.title} </Link>
                   {isAdmin ? <button className='btn btn-secondary min-h-0 h-full' onClick={() => {setPostToDelete({...post}); document.getElementById('my_modal_2').showModal()}}>Eliminar</button> : null}
                 </div>
                 {isClient ? new Date(post.createdAt).toLocaleDateString() : null}

@@ -25,7 +25,6 @@ module.exports = {
           "base-100": "#F4DFB6"
         }
       },
-      'light',
       'dark',
     ]
   }
