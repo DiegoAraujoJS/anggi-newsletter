@@ -11,7 +11,7 @@ export const siteTitle = 'Anggi Bustamante';
 export default function Layout({ children, home }) {
   const {theme, setTheme} = useStore()
   return (
-    <div>
+    <div className='border border-solid border-black min-h-screen relative'>
       <div className={styles.container}>
         <Head>
           <link rel="icon" href="/favicon.ico" />
