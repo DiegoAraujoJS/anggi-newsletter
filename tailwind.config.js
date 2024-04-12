@@ -22,7 +22,7 @@ module.exports = {
           "primary": "#D6D46D",
           "secondary": "#9A4444",
           "accent": "#DE8F5F",
-          "base-100": "#F4DFB6"
+          "base-100": "#F2EAD3"
         }
       },
       'dark',

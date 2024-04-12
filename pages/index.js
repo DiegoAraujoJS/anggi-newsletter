@@ -86,7 +86,7 @@ export default function Home({allPostsData, presentation, isAdmin}) {
       {isAdmin ? <div>
         <RichTextEditor value={body} handleChange={html => setBody(html)}/>
         <button className='btn' onClick={() => document.getElementById('my_modal_3').showModal()}>Update</button>
-      </div> : <section className="text-lg presentation">
+      </div> : <section className="text-xl presentation">
           <div dangerouslySetInnerHTML={{__html: body.replace(`target="_blank"`, '')}}></div>
         </section>}
 
