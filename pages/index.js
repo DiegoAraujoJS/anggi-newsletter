@@ -34,8 +34,11 @@ export default function Home({allPostsData, presentation, isAdmin}) {
 
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
-          Seguro que querés eliminar "{postToDelete.title}"?
+          Segura que querés eliminar "{postToDelete.title}"?
           <div className="modal-action">
+            <button onClick={() => {
+
+            }}>Enviar newsletter</button>
             <button className="btn btn-primary" onClick={() => fetch(`/api/posts/deletePost`, {
               method: 'POST',
               headers: {
