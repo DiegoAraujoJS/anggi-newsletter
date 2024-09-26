@@ -15,6 +15,7 @@ export default function Page() {
   const [title, setTitle] = useState('')
   const [subTitle, setSubTitle] = useState('')
   const [body, setBody] = useState('')
+  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     setTitle(localStorage.getItem('title') ?? '')
@@ -63,22 +64,28 @@ export default function Page() {
         <div className="modal-box">
           <PostBody title={title} body={body} date={new Date().toLocaleDateString()}/>
           <div className="modal-action">
-            <button className="btn btn-primary" onClick={() => fetch(`/api/posts/createPost`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({title, subTitle, body, date: new Date().toISOString()})
-            })
-              .then(async (response) => {
-                if (response.status !== 200) return response.text().then(toast.error)
-                const post = await response.json()
-                router.push(`/posts/${post.id}`)
-                localStorage.removeItem('title')
-                localStorage.removeItem('subTitle')
-                localStorage.removeItem('body')
-              })
-            }>Postear</button>
+            <button className="btn btn-primary" onClick={() => {
+              if (!isFetching) {
+                setIsFetching(true)
+                fetch(`/api/posts/createPost`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({title, subTitle, body, date: new Date().toISOString()})
+                })
+                  .then(async (response) => {
+                    setIsFetching(false)
+                    if (response.status !== 200) return response.text().then(toast.error)
+                    const post = await response.json()
+                    router.push(`/posts/${post.id}`)
+                    localStorage.removeItem('title')
+                    localStorage.removeItem('subTitle')
+                    localStorage.removeItem('body')
+                  })
+              }
+            }
+            }>{isFetching ? "Posteando..." : "Postear"}</button>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Cerrar</button>
