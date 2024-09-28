@@ -32,6 +32,10 @@ export default function Home({allPostsData, presentation, isAdmin}) {
         <title>{siteTitle}</title>
       </Head>
 
+
+        {isAdmin ? <div><Link className="text-palette-4 text-lg" href="/admin/subscribers">Ir a subscriptores</Link></div> : null}
+        {isAdmin ? <div><Link className="text-palette-4 text-lg" href="/subscribe">Ir a subscribe</Link></div> : null}
+
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           Segura que querés eliminar "{postToDelete.title}"?
