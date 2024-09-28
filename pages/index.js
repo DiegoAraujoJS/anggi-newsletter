@@ -33,7 +33,7 @@ export default function Home({allPostsData, presentation, isAdmin}) {
       </Head>
 
 
-        {isAdmin ? <div><Link className="text-palette-4 text-lg" href="/admin/subscribers">Ir a subscriptores</Link></div> : null}
+        {isAdmin ? <div><Link className="text-palette-4 text-lg" href="/admin/subscribers">Ir a suscriptores</Link></div> : null}
         {isAdmin ? <div><Link className="text-palette-4 text-lg" href="/subscribe">Ir a subscribe</Link></div> : null}
 
       <dialog id="my_modal_2" className="modal">

@@ -18,7 +18,7 @@ export default function Page() {
         })
           .then(res => {
             if (res.status == 200) {
-              return toast.success('Se guardó la subscripción 🤗')
+              return toast.success('Se guardó la suscripción 🤗')
             }
             return res.text().then(toast.error)
           })

@@ -5,6 +5,6 @@ export default function handler (req, res) {
     .then(res.send)
     .catch(err => {
       console.log(err)
-      return res.status(400).send(err.code === 11000 ? `El mail ${req.body.email} ya está subscripto 😘` : "Hubo un error al subscribirte 😭")
+      return res.status(400).send(err.code === 11000 ? `El mail ${req.body.email} ya está suscripto 😘` : "Hubo un error al suscribirte 😭")
     })
 }

@@ -6,9 +6,9 @@ export default function AdminSubscribers({ subscribers }) {
   return (
     <Layout>
       <Head>
-        <title>Admin: Email subscriptos</title>
+        <title>Admin: Email suscriptos</title>
       </Head>
-      <h1 className="text-3xl font-bold mb-4">Emails subscriptos</h1>
+      <h1 className="text-3xl font-bold mb-4">Emails suscriptos</h1>
       <ul className="list-disc list-inside">
         {subscribers.map((subscriber, index) => (
           <li key={index} className="mb-2">
