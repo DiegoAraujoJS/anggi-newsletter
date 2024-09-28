@@ -1,21 +1,69 @@
 import Layout from '../../../components/layout';
 import Head from 'next/head';
 import { getAllSubscriptions } from '../../../lib/database/queries/subscription';
+import { useRouter } from 'next/router';
 
 export default function AdminSubscribers({ subscribers }) {
+  const router = useRouter();
+
+  const toggleBan = async (email) => {
+    try {
+      const response = await fetch('/api/ban', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update subscriber status');
+      }
+
+      // Reload the page to fetch fresh data
+      router.reload();
+    } catch (error) {
+      console.error('Error updating subscriber status:', error);
+      alert('Failed to update subscriber status');
+    }
+  };
+
   return (
     <Layout>
       <Head>
         <title>Admin: Email suscriptos</title>
       </Head>
       <h1 className="text-3xl font-bold mb-4">Emails suscriptos</h1>
-      <ul className="list-disc list-inside">
-        {subscribers.map((subscriber, index) => (
-          <li key={index} className="mb-2">
-            {subscriber.email} - Se subscribió el: {subscriber.createdAt}
-          </li>
-        ))}
-      </ul>
+      <span>Tocar en <b>Deshabilitar</b> va a excluir a esa persona del newsletter.</span>
+      <div className="overflow-x-auto">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th className="w-1/4">Nombre</th>
+              <th className="w-1/4">Email</th>
+              <th className="w-1/4">Fecha de suscripción</th>
+              <th className="w-1/4">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {subscribers.map((subscriber, index) => (
+              <tr key={index} className={`${!subscriber.enabled ? 'bg-error bg-opacity-50' : 'hover'}`}>
+                <td>{subscriber.name}</td>
+                <td>{subscriber.email}</td>
+                <td>{subscriber.createdAt}</td>
+                <td>
+                  <button
+                    className={`btn btn-sm ${subscriber.enabled ? 'btn-error' : 'btn-primary'}`}
+                    onClick={() => toggleBan(subscriber.email)}
+                  >
+                    {subscriber.enabled ? 'Deshabilitar' : 'Habilitar'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </Layout>
   );
 }
@@ -51,6 +99,8 @@ export async function getServerSideProps(context) {
       subscribers: subscribers.map((subscriber) => ({
         email: subscriber.email,
         createdAt: formatDate(subscriber._id.getTimestamp()),
+        enabled: subscriber.enabled === undefined ? true : subscriber.enabled,
+        name: subscriber.name,
       })),
     },
   };
