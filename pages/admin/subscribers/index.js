@@ -55,7 +55,13 @@ export default function AdminSubscribers({ subscribers }) {
             {subscribers.map((subscriber, index) => (
               <tr key={index} className={`${!subscriber.enabled ? 'bg-error bg-opacity-50' : 'hover'}`}>
                 <td>{subscriber.name}</td>
-                <td>{subscriber.email}</td>
+                <td>
+                  <div className="tooltip" data-tip={subscriber.email}>
+                    {subscriber.email.length > 24
+                      ? subscriber.email.slice(0, 24) + '..'
+                      : subscriber.email}
+                  </div>
+                </td>
                 <td>{subscriber.createdAt}</td>
                 <td>
                   {isUpdating === subscriber.email ? 
