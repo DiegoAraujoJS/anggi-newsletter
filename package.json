@@ -25,6 +25,7 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "@types/react": "^18.3.10",
     "autoprefixer": "^10.4.16",
     "daisyui": "^3.9.2",
     "postcss": "^8.4.31",

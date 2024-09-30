@@ -2,12 +2,18 @@ import Layout from '../../../components/layout';
 import Head from 'next/head';
 import { getAllSubscriptions } from '../../../lib/database/queries/subscription';
 import { useRouter } from 'next/router';
+import {useState} from "react"
 
 export default function AdminSubscribers({ subscribers }) {
   const router = useRouter();
+  const [isUpdating, setIsUpdating] = useState(null);
 
   const toggleBan = async (email) => {
     try {
+      if (isUpdating) {
+        return;
+      }
+      setIsUpdating(email);
       const response = await fetch('/api/ban', {
         method: 'POST',
         headers: {
@@ -52,12 +58,15 @@ export default function AdminSubscribers({ subscribers }) {
                 <td>{subscriber.email}</td>
                 <td>{subscriber.createdAt}</td>
                 <td>
-                  <button
-                    className={`btn btn-sm ${subscriber.enabled ? 'btn-error' : 'btn-primary'}`}
-                    onClick={() => toggleBan(subscriber.email)}
-                  >
-                    {subscriber.enabled ? 'Deshabilitar' : 'Habilitar'}
-                  </button>
+                  {isUpdating === subscriber.email ? 
+                    <span className="loading loading-spinner loading-xs"></span> :
+                    <button
+                      className={`btn btn-sm ${subscriber.enabled ? 'btn-error' : 'btn-primary'}`}
+                      onClick={() => toggleBan(subscriber.email)}
+                    >
+                      {subscriber.enabled ? 'Deshabilitar' : 'Habilitar'}
+                    </button>
+                  }
                 </td>
               </tr>
             ))}
